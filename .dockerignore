@@ -3,3 +3,4 @@
 .idea
 *.iml
 Gemfile.lock
+.DS_Store
