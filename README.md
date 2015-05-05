@@ -9,7 +9,7 @@ This **Dockerfile** is a [trusted build](https://registry.hub.docker.com/u/sath8
 
     docker pull sath89/docker2logstash
 
-### Run with [docker-compose.yml](https://github.com/MaksymBilenko/Docker2Logstash/docker-compose.yml)
+### Run with [docker-compose.yml](https://github.com/MaksymBilenko/Docker2Logstash/blob/master/docker-compose.yml)
 
     curl https://raw.githubusercontent.com/MaksymBilenko/Docker2Logstash/master/docker-compose.yml \
     -o docker-compose.yml
