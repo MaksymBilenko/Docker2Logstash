@@ -4,3 +4,5 @@
 *.iml
 Gemfile.lock
 .DS_Store
+docker-compose.yml
+README.md
