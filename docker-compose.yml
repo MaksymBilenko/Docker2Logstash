@@ -1,11 +1,22 @@
+elasticsearch:
+  image: elasticsearch
+
 logstash:
   image: sath89/logstash
   environment:
-    CONFIG: input {tcp { port => 9290 tags => "tcpin" codec => "json" } } output { elasticsearch { embedded => true } }
+    CONFIG: input { tcp { port => 9290 tags => "tcpin" codec => "json" } } output { elasticsearch { host => elasticsearch } }
   ports:
-   - "9301:9301"
-   - "9300:9300"
-   - "9290:9290"
+   - "9290:9290" #tcpin port
+   - "4560:4560" #log4j port
+  links:
+    - elasticsearch:elasticsearch
+
+kibana:
+  image: sath89/kibana
+  links:
+    - elasticsearch:elasticsearch
+  ports:
+    - "5601:5601" #kibana port
 
 docker2logstash:
   image: sath89/docker2logstash
@@ -13,10 +24,3 @@ docker2logstash:
     - /var/run/docker.sock:/var/run/docker.sock
   links:
     - logstash:logstash
-
-kibana:
-  image: sath89/kibana
-  links:
-    - logstash:elasticsearch
-  ports:
-    - "5601:5601"
