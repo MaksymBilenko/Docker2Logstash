@@ -36,7 +36,7 @@ class DockerToLogstash
     begin
       puts "#{Docker.version}".green
     rescue Exception => e
-      puts "Failed to connect to the docker API. Please check https://github.com/MaksymBilenko/Docker2Logstash/README.md".red
+      puts "Failed to connect to the docker API. Please check https://github.com/MaksymBilenko/Docker2Logstash/blob/master/README.md".red
       raise e
     end
     @threads = {}
@@ -94,7 +94,7 @@ class LogstashSender
     rescue Exception => e
       sleep 5
       puts "Unable to connect to the Logstash TCP Listner.".yellow
-      puts "Please check https://github.com/MaksymBilenko/Docker2Logstash/README.md".red
+      puts "Please check https://github.com/MaksymBilenko/Docker2Logstash/blob/master/README.md".red
       puts e.to_s.red
       retry
     end
