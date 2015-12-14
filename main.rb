@@ -102,7 +102,11 @@ class LogstashSender
 
   def sender(chunk)
     buffer = {}
-    buffer[:Message] = chunk.gsub(/\e\[(\d+)m/, '').gsub(/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]/,'')
+    if valid_json?(chunk) then
+      buffer = JSON.parse(chunk).inject({}){|memo,(k,v)| memo[k.to_sym] = v; memo}
+    else
+      buffer[:Message] = chunk.gsub(/\e\[(\d+)m/, '').gsub(/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]/,'')
+    end
 
     buffer[:Name] = @metadata['Name']
     buffer[:Image] = @metadata['Config']['Image']
@@ -115,6 +119,16 @@ class LogstashSender
     socket.puts(buffer.to_json)
     socket.close
   end
+
+  def valid_json?(json)
+    begin
+      JSON.parse(json)
+      return true
+    rescue JSON::ParserError => e
+      return false
+    end
+  end
+
 end
 
 
