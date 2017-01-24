@@ -1,0 +1,12 @@
+---
+buildName: "docker2logstash"
+links:
+  Git: "git@github.com:MaksymBilenko/Docker2Logstash.git"
+  Job: "http://jenkins.default.10.23.14.227.xip.io/job/docker2logstash"
+  Production: "http://192.168.181.247:80/kubernetes/pods?namespace=default-prod"
+  Staging: "http://192.168.181.247:80/kubernetes/pods?namespace=default-staging"
+  Testing: "http://192.168.181.247:80/kubernetes/pods?namespace=default-testing"
+environments:
+  Testing: "default-testing"
+  Staging: "default-staging"
+  Production: "default-prod"
